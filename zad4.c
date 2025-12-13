@@ -57,8 +57,7 @@ int citaj(ARTIKAL a[])
         do
         {
             scanf("%lf", &a[i].kolicina);
-        } while(a[i].kolicina < 0); // ne mozes imat -1 jabuka npr kao wtf lice 
-                                    // vidi se da mi nije do zivota jebem ti prog (klasican etf student)
+        } while(a[i].kolicina < 0); // ne mozes imat -1 jabuka npr kao wtf
     }
 
     return n;
