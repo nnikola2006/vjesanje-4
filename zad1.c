@@ -54,3 +54,69 @@ int prost(int x)
 
     return 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//moguca modifikacija
+int savrsen(int n)
+{
+    int s=0;
+
+    for(int i=1;i<=n/2;i++)
+        if(n%i==0)
+            s+=i;
+
+    return s==n;
+}
+
+int suma_djelilaca(int n)
+{
+    int s=0;
+
+    for(int i=1;i<=n;i++)
+        if(n%i==0)
+            s+=i;
+
+    return s;
+}
+
+int prvi_veci_prost(int n)
+{
+    for(int i=n+1;;i++)
+        if(prost(i))
+            return i;
+}
+
+int armstrong(int n)
+{
+    int t=n, cifre=0, s=0;
+
+    while(t)
+    {
+        cifre++;
+        t/=10;
+    }
+
+    t=n;
+    while(t)
+    {
+        int c=t%10, p=1;
+        for(int i=0;i<cifre;i++)
+            p*=c;
+        s+=p;
+        t/=10;
+    }
+
+    return s==n;
+}
