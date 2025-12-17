@@ -15,6 +15,7 @@ int main()
     // Ako kolona prve matrice != redu druge onda se ne mogu mnoziti
     if(n1 != m2)
     {
+        printf("Ne mogu se mnoziti\n");
         return 0;
     }
 
