@@ -67,3 +67,58 @@ void pomnozi(int a[][10], int b[][10], int c[][10], int m1, int n1, int m2, int 
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+// moguce modifikacije
+void oduzmi(int a[][10], int b[][10], int c[][10], int m, int n)
+{
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            c[i][j] = a[i][j] - b[i][j];
+}
+
+void saberi(int a[][10], int b[][10], int c[][10], int m, int n)
+{
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            c[i][j] = a[i][j] + b[i][j];
+}
+
+void transponuj(int a[][10], int t[][10], int m, int n)
+{
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            t[j][i] = a[i][j];
+}
+
+void skalar(int a[][10], int c[][10], int m, int n, int k)
+{
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            c[i][j] = a[i][j] * k;
+}
+
+int suma_dijagonale(int a[][10], int n)
+{
+    int s = 0;
+    for(int i = 0; i < n; i++)
+        s += a[i][i];
+    return s;
+}
+int jednake(int a[][10], int b[][10], int m, int n)
+{
+    for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            if(a[i][j] != b[i][j])
+                return 0;
+    return 1;
+}
