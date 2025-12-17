@@ -14,7 +14,7 @@ int main()
     do
     {
         scanf("%d", &n);
-    } while (n <= 0);
+    } while (n <= 0 || n > 100);
     int a[100]; // nmg napisati a[n] jer mi kompaljer ispisuje gresku al de probajte n umjesto 100
                 // kod vas mozda radi ako nije vsc
 
