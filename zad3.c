@@ -20,6 +20,7 @@ int main()
     POLINOM m = pomnozi(p1, p2);
 
     ispisi(s);
+    printf("\n");
     ispisi(m);
 
     return 0;
@@ -33,7 +34,7 @@ POLINOM citaj()
     do
     {
         scanf("%d", &p.n);
-    } while (p.n > 100);
+    } while (p.n < 0 || p.n >= 100);
     
     for(int i = 0; i <= p.n; i++)
     {
@@ -72,16 +73,16 @@ POLINOM saberi(POLINOM pol1, POLINOM pol2)
         else
             temp_koef2 = 0;
 
-
-
         /* MOZE SE I OVAKO DA BUDE LJEPSE
          * int temp_koef1 = (i <= pol1.n) ? pol1.koef[i] : 0;
          * int temp_koef2 = (i <= pol2.n) ? pol2.koef[i] : 0;  
         */
-
         rez.koef[i] = temp_koef1 + temp_koef2;
     }
 
+    // Smanjuje do prvog najvece eksponenta koji nije 0
+    while (rez.n > 0 && rez.koef[rez.n] == 0)
+        rez.n--;
 
     return rez;
 }
@@ -90,36 +91,57 @@ POLINOM pomnozi(POLINOM pol1, POLINOM pol2)
 {
     POLINOM rez;
 
+    // Kolicina eksponenata za niz u kojem se mnoze (formula)
     rez.n = pol1.n + pol2.n;
+    if (rez.n >= 100) // jer je opseg od 0-99
+        rez.n = 99;
+
 
     // Stavljamo da su sve 0 za rez polinom
     for(int i = 0; i <= rez.n; i++)
-    {
         rez.koef[i] = 0;
-    }
 
     // Mnozi
     for(int i = 0; i <= pol1.n; i++)
     {
         for(int j = 0; j <= pol2.n; j++)
         {
-            rez.koef[i + j] += pol1.koef[i] * pol2.koef[j]; // neka formula
+            if(i + j < 100) // jer granica eksponenti je do 100 
+                rez.koef[i + j] += pol1.koef[i] * pol2.koef[j]; // neka formula
         }
     }
 
+    // smanjuje sve do prvog najvece eksponenta koji nije 0
+    while (rez.n > 0 && rez.koef[rez.n] == 0)
+        rez.n--;
+    
     return rez;
 }
 
 void ispisi(POLINOM pol)
 {
+    int prvi = 1;
+
     for(int i = pol.n; i >= 0; i--)
     {
-        printf("%d", pol.koef[i]);
+        // ako je koeficijent eksponenta = 0 ne ispisuje
+        if(pol.koef[i] == 0) 
+            continue;
 
-        if(i > 0)
-        {
-            printf("x^%d + ", i);
-        }
+        // jer ispred prvog clana ne smije imat + pa se stavlja ovaj uslov
+        if(!prvi)
+            printf(" + ");
+        
+        if(i == 0)
+            printf("%d", pol.koef[i]);
+        else if(i == 1)
+            printf("%dx", pol.koef[i]);
+        else
+            printf("%dx^%d", pol.koef[i], i);
+        first = 0;
     }
-    printf("\n");
+
+    // Ako su svi koeficijenti = 0 onda ispise 0 
+    if (prvi)
+        printf("0");
 }
