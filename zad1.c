@@ -1,7 +1,9 @@
 #include <stdio.h>
 
-/* Inace se ovako pise kao da se zna koje funkcije/metode postoje
- * da se ne cita kod njih ali mozete i vi pisati gore citavu funkciju a ne ispod main()
+/* 
+ * Inace se ovako pise kao da se zna koje funkcije/metode postoje
+ * da se ne cita kod tih funkcija ali mozete i vi pisati 
+ * gore citavu funkciju a ne ispod main()
  * Personal bias ukratko
  */
 int prost(int x);
