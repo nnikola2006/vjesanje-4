@@ -145,3 +145,121 @@ void ispisi(POLINOM pol)
     if (prvi)
         printf("0");
 }
+
+
+
+
+
+
+
+
+
+// modifikacija? (ako treba ovo onda morate stavit prototip funkcije iznad main()
+// tj. POLINOM podijeli(POLINOM a, POLINOM b);
+POLINOM podijeli(POLINOM a, POLINOM b)
+{
+    POLINOM q;
+    POLINOM temp = a;
+
+    // Ako je stepen djeljenika manji od djelitelja
+    if (a.n < b.n)
+    {
+        q.n = 0;
+        q.koef[0] = 0;
+        return q;
+    }
+
+    q.n = a.n - b.n;
+
+    // inicijalizacija količnika
+    for (int i = 0; i <= q.n; i++)
+        q.koef[i] = 0;
+
+    while (temp.n >= b.n)
+    {
+        int stepen = temp.n - b.n;
+        int koef = temp.koef[temp.n] / b.koef[b.n];
+
+        q.koef[stepen] = koef;
+
+        // oduzimanje: temp = temp - koef * b * x^stepen
+        for (int i = 0; i <= b.n; i++)
+            temp.koef[i + stepen] -= koef * b.koef[i];
+
+        // smanji stepen temp-a
+        while (temp.n > 0 && temp.koef[temp.n] == 0)
+            temp.n--;
+    }
+
+    return q;
+}
+
+// moguca isto
+POLINOM izvod(POLINOM p)
+{
+    POLINOM r;
+
+    if (p.n == 0)
+    {
+        r.n = 0;
+        r.koef[0] = 0;
+        return r;
+    }
+
+    r.n = p.n - 1;
+
+    for (int i = 1; i <= p.n; i++)
+        r.koef[i - 1] = i * p.koef[i];
+
+    return r;
+}
+
+// takodje
+int jednaki(POLINOM a, POLINOM b)
+{
+    if (a.n != b.n)
+        return 0;
+
+    for (int i = 0; i <= a.n; i++)
+        if (a.koef[i] != b.koef[i])
+            return 0;
+
+    return 1;
+}
+
+// znas pricu
+double vrijednost(POLINOM p, double x)
+{
+    double s = 0;
+    double xp = 1;
+
+    for (int i = 0; i <= p.n; i++)
+    {
+        s += p.koef[i] * xp;
+        xp *= x;
+    }
+
+    return s;
+}
+
+// dosta
+POLINOM oduzmi(POLINOM a, POLINOM b)
+{
+    POLINOM r;
+
+    r.n = (a.n > b.n) ? a.n : b.n;
+
+    for (int i = 0; i <= r.n; i++)
+    {
+        int ka = (i <= a.n) ? a.koef[i] : 0;
+        int kb = (i <= b.n) ? b.koef[i] : 0;
+
+        r.koef[i] = ka - kb;
+    }
+
+    // ukloni vodeće nule
+    while (r.n > 0 && r.koef[r.n] == 0)
+        r.n--;
+
+    return r;
+}
