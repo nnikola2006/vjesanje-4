@@ -100,3 +100,49 @@ void pisi(ARTIKAL a[], int n)
     printf("                                    UKUPNO: %.2lf\n", ukupna_cijena); // zabolje me kurac za 37 razmaka (da jesam brojo)
     printf("=================================================\n");
 }
+
+
+
+
+
+
+
+
+
+
+
+// moguce
+void filtriraj_cijena(ARTIKAL a[], int n, double min)
+{
+    for(int i = 0; i < n; i++)
+        if(a[i].cijena >= min)
+            printf("%d %s\n", a[i].identifikator, a[i].naziv);
+}
+
+// sortira po nečemu drugom
+// if(a[i].cijena > a[j].cijena)
+// if(a[i].cijena * a[i].kolicina > a[j].cijena * a[j].kolicina)
+// if(strcmp(a[i].naziv, a[j].naziv) > 0) (vjr nece ovo jer je strcmp sto nije radjeno)
+
+int nadji_po_id(ARTIKAL a[], int n, int id)
+{
+    for(int i = 0; i < n; i++)
+        if(a[i].identifikator == id)
+            return i;
+    return -1;
+}
+
+int najskuplji(ARTIKAL a[], int n)
+{
+    int max = 0;
+    for(int i = 1; i < n; i++)
+        if(a[i].cijena > a[max].cijena)
+            max = i;
+    return max;
+}
+
+void povecaj_cijenu(ARTIKAL a[], int n, double procenat)
+{
+    for(int i = 0; i < n; i++)
+        a[i].cijena *= (1 + procenat / 100);
+}
